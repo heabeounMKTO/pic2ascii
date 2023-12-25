@@ -3,6 +3,8 @@ import os
 import numpy as np
 import common_utils
 import argparse
+import time
+import sys
 
 
 def main():
@@ -55,8 +57,9 @@ def main():
                         (int(HEIGHT * scale_factor), HEIGHT),
                     )
                     common_utils.process_img(frame, HEIGHT, binary=BW)
-
-
+                    os.system("clear")
+                    sys.stdout.flush()
+                    time.sleep(0.005)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
