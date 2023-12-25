@@ -4,11 +4,11 @@ import os
 import math
 
 
-ISTRING = "▓oahkbdpqwmZO0QLCJUYXf-_/\|()[]?░"
+#ISTRING = "▓oahkbdpqwmZO0QLCJUYXf-_/\|()[]?░"
 BINSTRING = "▓░"
-
+ISTRING = "█@#W$9876543210?!abc;:+=-,._.:░▓"
 def print_npyrow(row: any, spacing: any):
-    print(f"{spacing}".join(map(str, row)), flush=True)
+    print(f"{spacing}".join(map(str, row)))
 
 def get_scaling_factor(img_arr: np.ndarray):
     return (img_arr.shape[1] / img_arr.shape[0] * 2)
@@ -32,6 +32,14 @@ def set_char(x: any, binary: bool=False):
 
 def process_img(img_arr: np.ndarray, height: int, binary: bool=False):
     vfunc = np.vectorize(set_char)
+    print('''
+
+
+    ''')
     for row in img_arr[:height]:
         row = vfunc(row, binary=binary)
         print_npyrow(row=row, spacing="")
+    print('''
+
+
+    ''')

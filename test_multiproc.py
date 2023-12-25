@@ -7,13 +7,20 @@ import time
 import sys
 
 
-HEIGHT = 128 
-IMG = "/home/hbpopos/console_vid_viewer/vid/renai.mp4"
+HEIGHT = 64 
+IMG = "/home/hb/Videos/renai.mp4"
 
 def test_print(continent= "penis"):
     print("the name of the conitnent is : ", continent) 
-   
 
+
+def split_img(input_img: np.ndarray,split: int):
+    index = 0
+    split_array = []
+    for idx ,x  in enumerate(range(split)):
+        _yea = input_img[int((HEIGHT/split) * (idx)):int((HEIGHT/split) * (idx+1))]
+        split_array.append(_yea)
+    return split_array
 if __name__ == "__main__":
     # names = ['h', 'uhhh', 'goofy ahh', 'ass']
     # procs = []
@@ -35,15 +42,23 @@ if __name__ == "__main__":
         ret , read_img = cap.read()       
         scale_factor = common_utils.get_scaling_factor(read_img)
         read_img = cv2.resize(cv2.cvtColor(read_img, cv2.COLOR_BGR2GRAY), (int(HEIGHT * scale_factor), HEIGHT))
-        ar1 = read_img[0:int(HEIGHT/2)]
-        ar2 = read_img[int(HEIGHT/2):HEIGHT]  
-        yea = [ar1, ar2]
+        # seg = 10 
+        # ar1 = read_img[0:int(HEIGHT/seg)]
+        # ar2 = read_img[int(HEIGHT/seg):(int(HEIGHT/seg)*2)]  
+        # ar3 = read_img[(int(HEIGHT/seg)*2):(int(HEIGHT/seg)*3)]  
+        # ar4 = read_img[(int(HEIGHT/seg)*3):(int(HEIGHT/seg)*4)]  
+        # ar5 = read_img[(int(HEIGHT/seg)*4):(int(HEIGHT/seg)*5)]  
+        # ar6 = read_img[(int(HEIGHT/seg)*5):(int(HEIGHT/seg)*6)]  
+        # ar7 = read_img[(int(HEIGHT/seg)*7):(int(HEIGHT/seg)*8)]  
+        # ar8 = read_img[(int(HEIGHT/seg)*8):(int(HEIGHT/seg)*9)]  
+        # ar9 = read_img[(int(HEIGHT/seg)*9):(int(HEIGHT/seg)*10)]  
+        # yea = [ar1, ar2,ar3,ar4,ar5,ar6,ar7,ar8,ar9]
+        yea = split_img(read_img, 4)        
         for fuck in yea:
             proc = Process(target=common_utils.process_img, args=(fuck,HEIGHT)) 
             procs.append(proc)
             proc.start()
-            for proc in procs:
-                    proc.join()
+    for proc in procs:
+            proc.join()
                     # os.system("clear")
                     # sys.stdout.flush()
-                    time.sleep(0.0005)

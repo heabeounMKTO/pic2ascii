@@ -59,7 +59,7 @@ def main():
                     common_utils.process_img(frame, HEIGHT, binary=BW)
                     os.system("clear")
                     sys.stdout.flush()
-                    time.sleep(0.005)
+                    # time.sleep()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
