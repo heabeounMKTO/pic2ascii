@@ -30,8 +30,8 @@ def set_char(x: any, binary: bool=False):
         if x == 0:
             return BINSTRING[1]
 
-def process_img(img_arr: np.ndarray, width: int, binary: bool=False):
+def process_img(img_arr: np.ndarray, height: int, binary: bool=False):
     vfunc = np.vectorize(set_char)
-    for row in img_arr[:width]:
+    for row in img_arr[:height]:
         row = vfunc(row, binary=binary)
         print_npyrow(row=row, spacing="")
